@@ -3,3 +3,33 @@ CLASSE PIECE:
 2- No construtor eu vou passar o tabuleiro (board) pq a posição de peça recém criada é nula dizendo que essa peça não foi colocada dentro do tabuleiro.
 3- GET/Set --> SET será apagado pq não vou permitir que meu tabuleiro seja alterado.
 4- Método getBoard() --> ao invés de public será protected pq somente classes e subclasses do mesmo pacote poderão acessar o tabuleiro de uma peça, não vou querer que o tabuleiro seja acessível pela camada de xadrez.
+
+CLASSE Board:
+
+método piece -> sobrecarga, retornando a peça pela posição.
+
+Subclasee de Piece --> ChessPiece:
+
+1- Terá somente o método getColor, não quero que a cor seja modificada. 
+
+CLasse ChessMatch:
+
+1- O coração do sistema do jogo de xadrez, é nela que terá todas as regras.
+2- Quem precisa saber da dimensão de um tabuleiro de xadrez é a classe ChessMatch.
+3- método getPieces retorna a matriz para jogo dessa partida.
+4- tabuleiro(board) tem uma matriz de peças do tipo piece, mas o meu método getPieces na classe ChessMatch retorna uma matriz do tipo ChessPiece pq estou na camada de xadrez, para minha aplicação que será o programa não quero liberar as peças do tipo piece pq estou desenvolvendo um programa em camadas então ele só pode enxergar a peça de xadrez e não aquela interna do tabuleiro.
+
+Solução: downcasting
+public ChessPiece[][] getPieces() {
+		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
+	    for(int i=0; i< board.getRows(); i++) {
+	    	for(int j=0; j< board.getColumns(); j++) {
+                        //downcasting
+	    		mat[i][j] = (ChessPiece) board.piece(i,j);
+	       	}
+	    	
+	    }
+	    return mat;
+	}
+
+
