@@ -1,0 +1,5 @@
+CLASSE PIECE:
+1- Na UML da classe Piece o #position que dizer que o atributo é do tipo protected, não quero que a posição seja visível na camada de xadrez.
+2- No construtor eu vou passar o tabuleiro (board) pq a posição de peça recém criada é nula dizendo que essa peça não foi colocada dentro do tabuleiro.
+3- GET/Set --> SET será apagado pq não vou permitir que meu tabuleiro seja alterado.
+4- Método getBoard() --> ao invés de public será protected pq somente classes e subclasses do mesmo pacote poderão acessar o tabuleiro de uma peça, não vou querer que o tabuleiro seja acessível pela camada de xadrez.
