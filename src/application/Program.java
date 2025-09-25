@@ -18,33 +18,32 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<>();
 		
-		while (true) {
+		while (!chessMatch.getCheckMate()) {
 			try {
 				 UI.clearScreen();
 				 UI.printMatch(chessMatch, captured);
 			     System.out.println();
-				 System.out.print("Source (ou 'sair' para encerrar): ");
-				 
-				 String sourceInput = sc.nextLine();
-				 if (sourceInput.equalsIgnoreCase("sair")) {
-	                    System.out.println("Programa encerrado. Até logo!");
-	                    break; // encerra o loop
-	                }
-				 
+				 System.out.print("Source (or  'exit' to finish): ");
+				 				 
 				 ChessPosition source = UI.readChessPosition(sc);
-				
+				 
+				 if (source == null) {
+					    System.out.println("Program finshed!");
+					    break;
+					}
+				 
 				 boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 				 UI.clearScreen();
 				 UI.printBoard(chessMatch.getPieces(), possibleMoves);
 				 System.out.println();
-				 System.out.print("Target (ou 'sair' para encerrar): ");
-				 
-	                String targetInput = sc.nextLine();
-	                if (targetInput.equalsIgnoreCase("sair")) {
-	                    System.out.println("Programa encerrado. Até logo!");
-	                    break;
-	                }
+				 System.out.print("Target (or 'exit' to finish): ");
+				 	                
 				 ChessPosition target = UI.readChessPosition(sc);
+				 
+				 if (target == null) {
+					    System.out.println("Program finshed!");
+					    break;
+					}
 					
 				 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 			     
@@ -63,7 +62,8 @@ public class Program {
 			}
 		}  
 		
-		 sc.close(); // close the scanner 
+	   UI.clearScreen();
+	   UI.printMatch(chessMatch, captured);
 		
 	}
 	
